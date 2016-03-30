@@ -1,14 +1,18 @@
+<?php
+namespace UrlParamParser\Test;
 
-class FiltersTest extends \PHPUnit_Framework_TestCase {
-    use GeneratorTrait;
+use URLParamParser\Filter;
+
+class FilterTest extends \PHPUnit_Framework_TestCase {
+
     public function testCanGetSimpleQuery()
     {
         $query = 'foo=bar';
-        $filters = new Filters($query);
+        $filters = new Filter($query);
         $this->assertEquals(
             $filters,
             [
-                Filters::EQUAL =>
+                Filter::EQUAL =>
                 [
                     'foo' => 'bar'
                 ]
@@ -18,17 +22,18 @@ class FiltersTest extends \PHPUnit_Framework_TestCase {
     public function testCanHandleMultipleQueryParams()
     {
         $query = 'foo=bar&fooz=baz';
-        $filters = new Filters($query);
+        $filters = new Filter($query);
         $this->assertEquals(
             $filters,
             [
-                Filters::EQUAL => [
+                Filter::EQUAL => [
                         'foo' => 'bar',
                         'fooz' => 'bar'
                 ]
             ]
         );
     }
+
     public function testCanHandleMultipleQueryParamsWithDifferentSigns()
     {
         $query = 'foo=bar&fooz=baz&goo>gar&loo<lar&rar≥raz&tar≤taz';
@@ -36,20 +41,20 @@ class FiltersTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(
             $filters,
             [
-                Filters::EQUAL => [
+                Filter::EQUAL => [
                     'foo' => 'bar',
                     'fooz' => 'bar'
                 ],
-                Filters::GREATER_THAN => [
+                Filter::GREATER_THAN => [
                     'goo' => 'gar'
                 ],
-                Filters::LESS_THAN => [
+                Filter::LESS_THAN => [
                     'loo' => 'lar'
                 ],
-                Filters::GREATER_OR_EQUAL_THAN => [
+                Filter::GREATER_OR_EQUAL_THAN => [
                     'rar' => 'raz'
                 ],
-                Filters::LESS_OR_EQUAL_THAN => [
+                Filter::LESS_OR_EQUAL_THAN => [
                     'tar' => 'taz'
                 ]
             ]

@@ -1,17 +1,23 @@
 <?php
-class Filters {
+
+namespace UrlParamParser;
+
+class Filter {
+
     const EQUAL = 'eq';
     const LESS_THAN = 'lt';
     const GREATER_THAN = 'gt';
     const LESS_OR_EQUAL_THAN = 'ge';
     const GREATER_OR_EQUAL_THAN = 'le';
+
     const ACCEPTED_SIGNS = [
-        '≤' => Filters::LESS_OR_EQUAL_THAN,
-        '≥' => Filters::GREATER_OR_EQUAL_THAN,
-        '>' => Filters::GREATER_THAN,
-        '<' => Filters::LESS_THAN,
-        '=' => Filters::EQUAL
+        '≤' => Filter::LESS_OR_EQUAL_THAN,
+        '≥' => Filter::GREATER_OR_EQUAL_THAN,
+        '>' => Filter::GREATER_THAN,
+        '<' => Filter::LESS_THAN,
+        '=' => Filter::EQUAL
     ];
+
     private $filters;
     /**
      * @return mixed

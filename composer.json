@@ -1,0 +1,15 @@
+{
+  "name": "danielhabib/urlparamparser",
+  "description": "Cleanly pulls out all sorts and params for you!",
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.2"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "UrlParamParser\\": ""
+    }
+  }
+}

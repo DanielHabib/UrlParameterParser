@@ -1,0 +1,11 @@
+<phpunit
+    bootstrap="vendor/autoload.php"
+    colors="true"
+    verbose="true"
+>
+    <testsuites>
+        <testsuite name="URL Param Parser Unit Tests">
+            <directory>./test/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

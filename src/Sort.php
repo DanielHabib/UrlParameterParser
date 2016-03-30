@@ -1,6 +1,9 @@
 <?php
 
-class Sorts {
+namespace UrlParamParser;
+
+class Sort {
+
     const DIRECTION_ASCENDING = 'asc';
     const DIRECTION_DESCENDING = 'desc';
     private $sorts;

@@ -10,12 +10,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase {
         $query = 'foo=bar';
         $filters = new Filter($query);
         $this->assertEquals(
-            $filters,
+            $filters->getFilters()[Filter::EQUAL],
             [
-                Filter::EQUAL =>
-                [
-                    'foo' => 'bar'
-                ]
+                'foo' => 'bar'
             ]
         );
     }
@@ -24,26 +21,26 @@ class FilterTest extends \PHPUnit_Framework_TestCase {
         $query = 'foo=bar&fooz=baz';
         $filters = new Filter($query);
         $this->assertEquals(
-            $filters,
+            $filters->getFilters()[Filter::EQUAL],
+
             [
-                Filter::EQUAL => [
-                        'foo' => 'bar',
-                        'fooz' => 'bar'
-                ]
-            ]
+                'foo' => 'bar',
+                'fooz' => 'baz'
+             ]
+
         );
     }
 
     public function testCanHandleMultipleQueryParamsWithDifferentSigns()
     {
         $query = 'foo=bar&fooz=baz&goo>gar&loo<lar&rar≥raz&tar≤taz';
-        $filters = new Filters($query);
+        $filters = new Filter($query);
         $this->assertEquals(
-            $filters,
+            $filters->getFilters(),
             [
                 Filter::EQUAL => [
                     'foo' => 'bar',
-                    'fooz' => 'bar'
+                    'fooz' => 'baz'
                 ],
                 Filter::GREATER_THAN => [
                     'goo' => 'gar'

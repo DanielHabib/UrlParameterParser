@@ -2,6 +2,8 @@
   "name": "danielhabib/urlparamparser",
   "description": "Cleanly pulls out all sorts and params for you!",
   "require": {
+    "php": ">=5.4.0",
+    "fzaninotto/faker": "^1.5"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.2"
@@ -9,7 +11,12 @@
 
   "autoload": {
     "psr-4": {
-      "UrlParamParser\\": ""
+      "UrlParamParser\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "UrlParamParser\\Test\\": "test/"
     }
   }
 }

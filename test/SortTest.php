@@ -9,34 +9,28 @@ class SortTest extends \PHPUnit_Framework_TestCase {
     {
         $rawSort = ['foo'];
         $sorts = new Sort($rawSort);
-        $this->assertEquals([Sort::DIRECTION_ASCENDING=>$rawSort], $sorts);
+        $this->assertEquals(['foo'=> Sort::DIRECTION_ASCENDING], $sorts->getSorts());
     }
     public function testSortsCorrectlyParsesMultipleInputs()
-    {
-        $rawSort = ['foo', '-' . 'bar', 'baz'];
-        $sorts = new Sorts($rawSort);
-        $this->assertEquals(
-            [
-                Sort::DIRECTION_ASCENDING=>$rawSort[0],
-                Sort::DIRECTION_DESCENDING=>$rawSort[1],
-                Sort::DIRECTION_ASCENDING=>$rawSort[2],
-            ], $sorts);
-    }
-    public function testSortsMaintainsSortOrder()
     {
         $rawSort = ['foo', '-' . 'bar', 'baz'];
         $sorts = new Sort($rawSort);
         $this->assertEquals(
             [
-                Sort::DIRECTION_ASCENDING=>$rawSort[0],
-            ], $sorts[0]);
-        $this->assertEquals(
-            [
-                Sort::DIRECTION_DESCENDING=>$rawSort[1],
-            ], $sorts[1]);
-        $this->assertEquals(
-            [
-                Sort::DIRECTION_ASCENDING=>$rawSort[2],
-            ], $sorts[2]);
+                $rawSort[0]=>Sort::DIRECTION_ASCENDING,
+                substr($rawSort[1], 1)=>Sort::DIRECTION_DESCENDING,
+                $rawSort[2]=>Sort::DIRECTION_ASCENDING,
+            ], $sorts->getSorts());
+    }
+    public function testSortsMaintainsSortOrder()
+    {
+        $rawSort = ['foo', '-' . 'bar', 'baz'];
+        $sorts = new Sort($rawSort);
+        $i = 0;
+        foreach($sorts as $sort => $direction) {
+            $expectedSort = $direction === Sort::DIRECTION_DESCENDING ? substr($rawSort[$i], 1) : $rawSort[$i];
+            $this->assertEquals($expectedSort, $sort);
+            $i++;
+        }
     }
 }

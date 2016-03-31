@@ -6,7 +6,7 @@ class Sort {
 
     const DIRECTION_ASCENDING = 'asc';
     const DIRECTION_DESCENDING = 'desc';
-    private $sorts;
+    private $sorts = [];
     /**
      * @return mixed
      */
@@ -26,7 +26,7 @@ class Sort {
         foreach ($sorts as $sort) {
             $direction = $sort[0] === '-' ? $this::DIRECTION_DESCENDING : $this::DIRECTION_ASCENDING;
             $column = $direction === $this::DIRECTION_DESCENDING ? substr($sort, 1) : $sort;
-            array_push($this->sorts, [$column => $direction]);
+            $this->sorts[$column] = $direction;
         }
     }
 }
